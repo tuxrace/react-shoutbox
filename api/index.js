@@ -2,6 +2,7 @@ var app = require('express')()
 var admin = require('firebase-admin')
 var moment = require('moment')
 var serviceAccount = require('../shoutbox-12210-firebase-adminsdk-3p6o3-0ba72de14d.json')
+var bodyParser = require('body-parser')
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -12,7 +13,7 @@ admin.initializeApp({
 var database = admin.database()
 var date = Date.now()
 
-function writeUserData (userId, username, password, imageUrl) {
+function writeUserData(userId, username, password, imageUrl) {
   database.ref('users/' + userId).set({
     username,
     password,
@@ -39,6 +40,11 @@ writeUserData('2', 'ben@mail.com', 'test','http://lorempixel.com/g/400/200/')
 writeUserData('3', 'gina@mail.com', 'test','http://lorempixel.com/g/400/200/')
 */
 
+app.use(bodyParser.json());       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+}));
+
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
@@ -49,8 +55,19 @@ app.get('/api', (req, res) => {
   res.send('test')
 })
 
-app.get('/api/auth', (req, res) => {
-  res.send('auth')
+app.post('/api/auth', (req, res) => {
+  const username = req.body.username
+  const password = req.body.password
+  database.ref('users/').once('value')
+    .then(snapshot => {
+      snapshot.val().forEach(c => {
+        if (c.username === username && c.password === password) {
+          res.json('authorized')
+        } else {
+          res.json('denied')
+        }
+      })
+    })
 })
 
 app.get('/api/adduser', (req, res) => {
@@ -64,25 +81,25 @@ app.get('/api/addshout', (req, res) => {
 
 app.get('/api/posts', (req, res) => {
   database.ref('posts/').orderByChild('date').once('value')
-  .then(snapshot => {
-    var r = []
-    snapshot.forEach(child => {
-      r.push(child)
-    })
+    .then(snapshot => {
+      var r = []
+      snapshot.forEach(child => {
+        r.push(child)
+      })
 
-    res.json(r.reverse())
-  })
+      res.json(r.reverse())
+    })
 })
 
 app.get('/api/users', (req, res) => {
   database.ref('users/').once('value')
-  .then(snapshot => {
-    var r = []
-    snapshot.forEach(child => {
-      r.push(child)
+    .then(snapshot => {
+      var r = []
+      snapshot.forEach(child => {
+        r.push(child)
+      })
+      res.json(r)
     })
-    res.json(r)
-  })
 })
 
 app.get('/api/delete', (req, res) => {
@@ -91,9 +108,9 @@ app.get('/api/delete', (req, res) => {
 
 app.get('/api/posts/:id', (req, res) => {
   database.ref('posts/' + req.params.id).once('value')
-  .then(snapshot => {
-    res.json(snapshot)
-  })
+    .then(snapshot => {
+      res.json(snapshot)
+    })
 })
 
 app.get('/api/update/:id', (req, res) => {
@@ -102,5 +119,7 @@ app.get('/api/update/:id', (req, res) => {
   })
   res.json('done')
 })
+
+app.get('/api/')
 
 app.listen(3000, () => { console.log('server started at port 3000') })
