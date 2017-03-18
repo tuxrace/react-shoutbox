@@ -34,6 +34,7 @@
     "react-router-redux": "next",
     "redux-devtools": "^3.3.2",
     "redux-form": "^6.5.0",
+    "redux-logger": "^2.8.2",
     "redux-thunk": "^2.2.0",
     "socket.io": "^1.7.3",
     "webpack": "^2.2.1",

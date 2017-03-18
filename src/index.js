@@ -9,8 +9,10 @@ import { Provider } from 'react-redux'
 import { reducer as formReducer } from 'redux-form'
 import { main } from './reducers/main'
 import ReduxThunk from 'redux-thunk'
+import createLogger from 'redux-logger'
 
-const middlewares = [ReduxThunk]
+const logger = createLogger();
+const middlewares = [ReduxThunk, logger]
 const reducers = {
   form: formReducer,
   main
@@ -18,10 +20,6 @@ const reducers = {
 
 const reducer = combineReducers(reducers)
 const store = createStore(reducer, applyMiddleware(...middlewares))
-
-store.subscribe(() => {
-  console.log(store.getState())
-})
 
 ReactDOM.render(
   <Provider store={store}>

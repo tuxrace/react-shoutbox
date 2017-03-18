@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import Posts from '../components/Posts'
 import Message from '../components/Message'
-import { handleMessage, loadshouts, loadusers, setactive } from '../actions/index'
+import { handleMessage, loadshouts, loadusers, setactive, loadfollowing } from '../actions/index'
 import { connect } from 'react-redux'
 
 class ShoutContainer extends Component {
   constructor (props) {
     super(props)
     this.state = {showEdit: false, active: 0}
-    const { loadshouts, loadusers } = this.props
+    const { loadshouts, loadusers, loadfollowing } = this.props
     loadshouts(this.props.main.user)
     loadusers()
+    loadfollowing()
   }
   componentDidMount () {
     
@@ -40,4 +41,4 @@ ShoutContainer.propTypes = {
   main: React.PropTypes.object
 }
 
-export default connect(({main}) => ({main}), { handleMessage, loadshouts, loadusers, setactive })(ShoutContainer)
+export default connect(({main}) => ({main}), { handleMessage, loadshouts, loadusers, setactive, loadfollowing })(ShoutContainer)

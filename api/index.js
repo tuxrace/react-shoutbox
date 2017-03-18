@@ -23,7 +23,7 @@ function writeUserData(userId, username, password, imageUrl) {
   console.log('test')
 }
 
-function writePostData (postId, user, shout, date) {
+function writePostData(postId, user, shout, date) {
   database.ref('posts/' + postId).set({
     postId,
     user,
@@ -40,10 +40,10 @@ writeUserData('2', 'ben@mail.com', 'test','http://lorempixel.com/g/400/200/')
 writeUserData('3', 'gina@mail.com', 'test','http://lorempixel.com/g/400/200/')
 */
 
-app.use(bodyParser.json());       // to support JSON-encoded bodies
+app.use(bodyParser.json())       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
-}));
+}))
 
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
@@ -58,16 +58,24 @@ app.get('/api', (req, res) => {
 app.post('/api/auth', (req, res) => {
   const username = req.body.username
   const password = req.body.password
+  const users = []
   database.ref('users/').once('value')
     .then(snapshot => {
       snapshot.val().forEach(c => {
-        if (c.username === username && c.password === password) {
-          res.json('authorized')
-        } else {
-          res.json('denied')
-        }
+        users.push(c)
       })
     })
+    .then(s => {
+      const userObj = users.filter(x => x.username === username)
+      console.log('test', userObj)
+      if (userObj.length > 0 && userObj[0].username === username && userObj[0].password === password) {
+        console.log('ok')
+        res.json('authorized')
+      } else {
+        res.json('denied')
+      }
+    })
+
 })
 
 app.get('/api/adduser', (req, res) => {
@@ -120,6 +128,24 @@ app.get('/api/update/:id', (req, res) => {
   res.json('done')
 })
 
-app.get('/api/')
+app.get('/api/user/:username', (req, res) => {
+  const username = req.params.username
+  const users = []
+  database.ref('users/').once('value')
+    .then(snapshot => {
+      snapshot.val().forEach(c => {
+        users.push(c)
+      })
+    })
+    .then(s => {
+      const userObj = users.filter(x => x.username === username)
+      console.log('test', userObj)
+      if (userObj.length > 0) {
+        res.json(userObj)
+      } else {
+        res.json('user not found')
+      }
+    })
+})
 
 app.listen(3000, () => { console.log('server started at port 3000') })

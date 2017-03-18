@@ -19,9 +19,16 @@ export const handleMessage = data => (dispatch, getState) => {
 }
 
 export const del = data => (dispatch, getState) => {
-  console.log(data)
+  const { main } = getState()
+  console.log(main.user)
   fetch(`http://${window.location.hostname}:3000/api/delete?id=${data}`)
-  dispatch({ type: 'DELETE', data })
+  //dispatch({ type: 'DELETE', data })
+  fetch(`http://${window.location.hostname}:3000/api/posts`)
+    .then(r => r.json())
+    .then(r => {
+      var n = r.filter(x => x.user === main.user)
+      dispatch({ type: 'SHOUTS', data: n })
+    })
 }
 
 export const loadshouts = data => (dispatch, getState) => {
@@ -56,4 +63,11 @@ export const update = data => (dispatch, getState) => {
 
 export const setactive = data => (dispatch, getState) => {
   dispatch({ type: 'SET_ACTIVE', data })
+}
+
+export const loadfollowing = data => (dispatch, getState) => {
+  const { main } = getState()
+  fetch(`http://${window.location.hostname}:3000/api/user/${main.user}`)
+    .then(r => r.json())
+    .then(([r]) => dispatch({ type: 'SET_USER', data: { userInfo: r } }))
 }

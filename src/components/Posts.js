@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
 import { del, handleMessage, update } from '../actions/index'
 import EditForm from './EditForm'
 import moment from 'moment'

@@ -16,7 +16,7 @@ const renderField = ({ input, label, onChange, type, meta: { touched, error, war
 const LoginForm = ({ submitForm, handleSubmit, pristine, message }) => (
   <div className="container">          
           <form onSubmit={handleSubmit(submitForm)}>
-            <span className="alert text-white">{message}</span>
+            <span className="alert text-white">{message}</span> 
             <div className="form-group row">
               <label htmlFor="inputEmail3" className="col-sm-2 col-form-label text-white">Username</label>
               <div className="col-10 col-md-5">
