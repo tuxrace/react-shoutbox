@@ -26,7 +26,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route exact path="/" component={Login} />
       <Route path="/shout" component={Shout} />
-      <Route path="/timeline/:user" component={Timeline} />
+      <Route path="/timeline/(:user)" component={Timeline} />
     </Router>
   </Provider>
   , document.getElementById('app'))

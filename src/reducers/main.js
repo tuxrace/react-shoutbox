@@ -1,6 +1,7 @@
 const date = new Date()
+
 const getStorage = data => {
-  if (window.localStorage.auto) {
+  if (localStorage.auto) {
     const { user, auth } = JSON.parse(localStorage.getItem('auto'))
     switch (data) {
       case 'user':

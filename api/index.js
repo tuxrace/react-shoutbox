@@ -1,6 +1,5 @@
 var app = require('express')()
 var admin = require('firebase-admin')
-var moment = require('moment')
 var serviceAccount = require('../shoutbox-12210-firebase-adminsdk-3p6o3-0ba72de14d.json')
 var bodyParser = require('body-parser')
 
@@ -12,43 +11,10 @@ admin.initializeApp({
 
 var database = admin.database()
 var date = Date.now()
+loadUsers()
 
-function writeUserData (userId, username, password, imageUrl, follows) {
-  database.ref('users/' + userId).set({
-    username,
-    password,
-    imageUrl,
-    follows
-  })
-
-  console.log('test')
-}
-
-function writePostData (postId, user, shout, date) {
-  database.ref('posts/' + postId).set({
-    postId,
-    user,
-    shout,
-    date: Date.now()
-  })
-
-  console.log('test')
-}
-
-writeUserData('1', 'jon@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['ben@mail.com', 'rob@mail.com'] } )
-writeUserData('2', 'ben@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['jon@mail.com'] } )
-writeUserData('3', 'rob@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['ben@mail.com'] } )
-writeUserData('4', 'tommy@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['jon@mail.com'] } )
-writeUserData('5', 'gina@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['jon@mail.com'] } )
-writeUserData('6', 'logan@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['jon@mail.com'] } )
-writeUserData('7', 'alicia@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['jon@mail.com'] } )
-writeUserData('8', 'jackie@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['jon@mail.com'] } )
-writeUserData('9', 'peter@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['jon@mail.com'] } )
-writeUserData('10', 'eli@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['jon@mail.com'] } )
-
-
-app.use(bodyParser.json())       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
   extended: true
 }))
 
@@ -82,11 +48,6 @@ app.post('/api/auth', (req, res) => {
         res.json('denied')
       }
     })
-
-})
-
-app.get('/api/adduser', (req, res) => {
-  res.send('add')
 })
 
 app.get('/api/addshout', (req, res) => {
@@ -135,13 +96,6 @@ app.get('/api/update/:id', (req, res) => {
   res.json('done')
 })
 
-app.get('/api/follows', (req, res) => {
-  database.ref('users/3/follows').set({
-    names: ['jon@mail.com']
-  })
-  res.send('done')
-})
-
 app.get('/api/user/:username', (req, res) => {
   const username = req.params.username
   const users = []
@@ -153,7 +107,6 @@ app.get('/api/user/:username', (req, res) => {
     })
     .then(s => {
       const userObj = users.filter(x => x.username === username)
-      console.log('test', userObj)
       if (userObj.length > 0) {
         res.json(userObj)
       } else {
@@ -161,5 +114,38 @@ app.get('/api/user/:username', (req, res) => {
       }
     })
 })
+
+function writeUserData (userId, username, password, imageUrl, follows) {
+  database.ref('users/' + userId).set({
+    username,
+    password,
+    imageUrl,
+    follows
+  })
+}
+
+function writePostData (postId, user, shout, date) {
+  database.ref('posts/' + postId).set({
+    postId,
+    user,
+    shout,
+    date: Date.now()
+  })
+
+  console.log('test')
+}
+
+function loadUsers () {
+  writeUserData('1', 'jon@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['ben@mail.com', 'rob@mail.com'] })
+  writeUserData('2', 'ben@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['jon@mail.com'] })
+  writeUserData('3', 'rob@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['jon@mail.com', 'alicia@mail.com', 'peter@mail.com'] })
+  writeUserData('4', 'tommy@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['jon@mail.com'] })
+  writeUserData('5', 'gina@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['jon@mail.com'] })
+  writeUserData('6', 'logan@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['jon@mail.com'] })
+  writeUserData('7', 'alicia@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['jon@mail.com'] })
+  writeUserData('8', 'jackie@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['jon@mail.com'] })
+  writeUserData('9', 'peter@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['jon@mail.com'] })
+  writeUserData('10', 'eli@mail.com', 'test', 'http://lorempixel.com/g/400/200/', { names: ['jon@mail.com'] })
+}
 
 app.listen(3000, () => { console.log('server started at port 3000') })

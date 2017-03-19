@@ -7,7 +7,7 @@ import LoginForm from '../components/LoginForm'
 
 const wrapper = shallow(<LoginForm />)
 
-describe('Login Component', () => {
+describe('LoginForm Component', () => {
   it('it renders LoginForm', () => {
     expect(wrapper.length).toEqual(1)
   })

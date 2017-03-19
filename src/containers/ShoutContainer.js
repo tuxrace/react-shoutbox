@@ -3,6 +3,7 @@ import Posts from '../components/Posts'
 import Message from '../components/Message'
 import { handleMessage, loadshouts, setactive, setuser } from '../actions/index'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 
 class ShoutContainer extends Component {
   constructor (props) {
@@ -21,6 +22,9 @@ class ShoutContainer extends Component {
   }
   render () {
     return <div>
+      <div className="row">
+        <div className="col-lg-6"><Link to="/">Logout <i className="fa fa-sign-out" aria-hidden="true"></i></Link></div>
+      </div>
       <div className="row">
         <div className="col-12 col-lg-6">
           <Message />

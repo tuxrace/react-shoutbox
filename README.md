@@ -8,6 +8,9 @@
 ## To Run Backend
     node ./api/index.js
     Go to localhost:3000
+
+## To Test
+    yarn test
     
 ## Users
     

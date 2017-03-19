@@ -1,5 +1,4 @@
 import { browserHistory } from 'react-router'
-const { fetch, localStorage } = window
 
 export const login = data => (dispatch, getState) => {
   dispatch({ type: 'AUTHENTICATING', data: data.username })

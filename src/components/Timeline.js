@@ -1,9 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import moment from 'moment'
 import TimelineContainer from '../containers/TimelineContainer'
 import NotAuthorized from './NotAuthorized'
-const { history } = window
 
 const Timeline = ({ main, active, location }) => (
   <div className="container">
