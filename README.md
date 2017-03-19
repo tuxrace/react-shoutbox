@@ -1,13 +1,13 @@
 # Shoutbox
 
 ## To Run Frontend
-    yarn install or npm install
-    yarn start or npm start
-    Go to localhost:8080
+    1. yarn install or npm install
+    2. yarn start or npm start
+    3. Go to localhost:8080
 
-## To Run Backend
-    node ./api/index.js
-    Go to localhost:3000
+## To Run Backend Api
+    1. node ./api/index.js
+    2. Go to localhost:3000
 
 ## To Test
     yarn test
@@ -37,4 +37,3 @@
     peter@mail.com - jon
     eli@mail.com - jon
     jackie@mail.com - jon
-
