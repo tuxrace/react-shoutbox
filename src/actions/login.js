@@ -25,9 +25,11 @@ export const login = data => (dispatch, getState) => {
 
         fetch(`http://${window.location.hostname}:3000/api/user/${data.username}`)
           .then(r => r.json())
-          .then(([ r ]) => dispatch({ type: 'SET_USER', data: { userInfo: r } }))
+          .then(([ r ]) => {
+            dispatch({ type: 'SET_USER', data: { userInfo: r } })
+            browserHistory.push('/shout')
+          })
 
-        browserHistory.push('/shout')
       } else {
         dispatch({ type: 'AUTH_FAILURE', data: { auth: false, auth_message: 'Invalid credentials' } })
         localStorage.setItem('auto', JSON.stringify(Object.assign(authdata, { auth: false, auth_message: 'Invalid Credentials' })))

@@ -19,11 +19,12 @@ const initialState = {
     'q@mail.com', 'a@mail.com', 'z@mail.com'
   ],
   posts: [],
+  selected_posts:[],
   message: null,
   shoutinfo: null,
   active: null,
   remaining: 32,
-  userInfo: {}
+  userInfo: {follows: {names:[]}}
 }
 
 export const main = (state = initialState, action) => {
@@ -55,6 +56,10 @@ export const main = (state = initialState, action) => {
       return Object.assign({}, state, { active: action.data })
     case 'SET_USER':
       return Object.assign({}, state, action.data)
+    case 'SELECTED_USER':
+      return Object.assign({}, state, action.data)
+    case 'SELECTED_SHOUTS':
+      return Object.assign({}, state, { selected_posts: action.data })
     default:
       return state
   }
