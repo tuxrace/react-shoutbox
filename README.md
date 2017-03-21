@@ -43,4 +43,4 @@
 
 ## App design diagram
 
-https://github.com/tuxrace/react-shoutbox/raw/master/images/app-design-diagram.png
+![diagram](https://github.com/tuxrace/react-shoutbox/raw/master/images/app-design-diagram.png)
