@@ -40,3 +40,7 @@
     peter@mail.com - jon
     eli@mail.com - jon
     jackie@mail.com - jon
+
+## App design diagram
+
+https://github.com/tuxrace/react-shoutbox/raw/master/images/app-design-diagram.png
