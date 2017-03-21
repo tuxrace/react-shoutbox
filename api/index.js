@@ -1,6 +1,6 @@
 var app = require('express')()
 var admin = require('firebase-admin')
-var serviceAccount = require('../shoutbox-12210-firebase-adminsdk-3p6o3-0ba72de14d.json')
+var serviceAccount = require('../shoutbox-21d0ef6b1bde.json')
 var bodyParser = require('body-parser')
 
 admin.initializeApp({
