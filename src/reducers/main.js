@@ -1,6 +1,6 @@
 import { AUTH_SUCCESS, AUTH_FAILURE, SHOUTS, USERS, TYPED_MESSAGE,
-  REMAINING_CHARS, SAVE, DELETE } from '../types/index'
-const date = new Date()
+  REMAINING_CHARS, UPDATE, SET_ACTIVE, SET_USER,
+SELECTED_SHOUTS, SELECTED_USER } from '../types/index'
 
 const getStorage = data => {
   if (localStorage.auto) {
@@ -44,24 +44,16 @@ export const main = (state = initialState, action) => {
       return Object.assign({}, state, { message: action.data })
     case REMAINING_CHARS:
       return Object.assign({}, state, { remaining: action.data })
-    case SAVE:
-      return Object.assign({}, state, {
-        posts: state.posts.concat(
-          { shout: action.data, user: state.user, date }
-        )
-      })
-    case DELETE:
-      return Object.assign({}, state, { posts: state.posts.filter(x => x.postId !== action.data) })
-    case 'UPDATE':
+    case UPDATE:
       return Object.assign({}, state,
         { posts: state.posts.map(x => x.postId === action.data.active ? Object.assign(x, { shout: action.data.message }) : x) })
-    case 'SET_ACTIVE':
+    case SET_ACTIVE:
       return Object.assign({}, state, { active: action.data })
-    case 'SET_USER':
+    case SET_USER:
       return Object.assign({}, state, action.data)
-    case 'SELECTED_USER':
+    case SELECTED_USER:
       return Object.assign({}, state, action.data)
-    case 'SELECTED_SHOUTS':
+    case SELECTED_SHOUTS:
       return Object.assign({}, state, { selected_posts: action.data })
     default:
       return state
