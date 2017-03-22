@@ -1,6 +1,6 @@
 # Shoutbox
 
-## To Run Frontend
+## To Run
 
     1. yarn install or npm install
     2. yarn start or npm start
