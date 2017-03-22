@@ -23,7 +23,7 @@ class ShoutContainer extends Component {
   render () {
     return <div>
       <div className="row">
-        <div className="col-lg-6"><Link to="/">Logout <i className="fa fa-sign-out" aria-hidden="true"></i></Link></div>
+        <div className="col-lg-6"><Link to="/react-shoutbox/">Logout <i className="fa fa-sign-out" aria-hidden="true"></i></Link></div>
       </div>
       <div className="row">
         <div className="col-12 col-lg-6">
