@@ -1,4 +1,5 @@
 import { browserHistory } from 'react-router'
+import { AUTH_SUCCESS, AUTH_FAILURE, SET_USER } from '../types/index'
 const serverapi = 'https://shoutbox.mybluemix.net'
 export const login = data => (dispatch, getState) => {
   dispatch({ type: 'AUTHENTICATING', data: data.username })
@@ -20,17 +21,17 @@ export const login = data => (dispatch, getState) => {
     .then(r => {
       if (r === 'authorized') {
         window.localStorage.setItem('auto', JSON.stringify(Object.assign(authdata, { auth: true, user: data.username })))
-        dispatch({ type: 'AUTH_SUCCESS', data: { auth: true, user: data.username } })
+        dispatch({ type: AUTH_SUCCESS, data: { auth: true, user: data.username } })
 
         fetch(`${serverapi}/api/user/${data.username}`)
           .then(r => r.json())
           .then(([ r ]) => {
-            dispatch({ type: 'SET_USER', data: { userInfo: r } })
+            dispatch({ type: SET_USER, data: { userInfo: r } })
             browserHistory.push('/shout')
           })
 
       } else {
-        dispatch({ type: 'AUTH_FAILURE', data: { auth: false, auth_message: 'Invalid credentials' } })
+        dispatch({ type: AUTH_FAILURE, data: { auth: false, auth_message: 'Invalid credentials' } })
         localStorage.setItem('auto', JSON.stringify(Object.assign(authdata, { auth: false, auth_message: 'Invalid Credentials' })))
       }
     })
