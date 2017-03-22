@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import { SHOUTS, } from '../types/index'
 const serverapi = 'https://shoutbox.mybluemix.net'
 var config = {
   apiKey: 'AIzaSyBOM9ePkyA10zmtbPxRe3MlojcaAG-pJ6c',
@@ -25,7 +26,7 @@ export const add = data => (dispatch, getState) => {
 }
 
 export const handleMessage = data => (dispatch, getState) => {
-  dispatch({ type: 'NEW', data })
+  dispatch({ type: TYPED_MESSAGE, data })
   dispatch({ type: 'REMAINING', data: 32 - data.length })
 }
 

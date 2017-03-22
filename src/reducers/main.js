@@ -1,3 +1,5 @@
+import { AUTH_SUCCESS, AUTH_FAILURE, SHOUTS, USERS, TYPED_MESSAGE,
+  REMAINING_CHARS, SAVE, DELETE } from '../types/index'
 const date = new Date()
 
 const getStorage = data => {
@@ -20,35 +22,35 @@ const initialState = {
     'q@mail.com', 'a@mail.com', 'z@mail.com'
   ],
   posts: [],
-  selected_posts:[],
+  selected_posts: [],
   message: null,
   shoutinfo: null,
   active: null,
   remaining: 32,
-  userInfo: {follows: {names:[]}}
+  userInfo: {follows: {names: []}}
 }
 
 export const main = (state = initialState, action) => {
   switch (action.type) {
-    case 'AUTH_SUCCESS':
+    case AUTH_SUCCESS:
       return Object.assign({}, state, action.data)
-    case 'AUTH_FAILURE':
+    case AUTH_FAILURE:
       return Object.assign({}, state, action.data)
-    case 'SHOUTS':
+    case SHOUTS:
       return Object.assign({}, state, { posts: action.data })
-    case 'USERS':
+    case USERS:
       return Object.assign({}, state, { allusers: action.data })
-    case 'NEW':
+    case TYPED_MESSAGE:
       return Object.assign({}, state, { message: action.data })
-    case 'REMAINING':
+    case REMAINING_CHARS:
       return Object.assign({}, state, { remaining: action.data })
-    case 'SAVE':
+    case SAVE:
       return Object.assign({}, state, {
         posts: state.posts.concat(
           { shout: action.data, user: state.user, date }
         )
       })
-    case 'DELETE':
+    case DELETE:
       return Object.assign({}, state, { posts: state.posts.filter(x => x.postId !== action.data) })
     case 'UPDATE':
       return Object.assign({}, state,
