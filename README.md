@@ -42,3 +42,33 @@
 ## App design diagram
 
 ![diagram](https://github.com/tuxrace/react-shoutbox/raw/master/images/app-design-diagram.png)
+
+## User story
+
+    Application Title: ShoutBux
+    Description: A twitter like application that lets you post a “shout”(with a max character limit) to your timeline.
+    Specs:
+    1. Must be written in NodeJS frameworks (expressJS, meteorJS etc).
+    2. Must have its own Repository(GitHub, BitBucket etc).
+    3. Must have testing.
+    4. Must use Database storage(MySQL, sqLite or MongoDB etc).
+    5. A README file that contains the information about the application and the steps on how to run it.
+    6. Must have a high level app design structure diagram. (Important!)
+
+    Requirements:
+    1. The application should have a simple login feature.
+        - Must implement correct form handling/validation.
+        - Seed the app with atleast 10 users.
+    2. Authorized users can post, edit, delete a “shout” to their own timeline.
+        - A “shout” should contain 32 chars max.
+        - Should contain date posted ( momentjs library can be used)
+        - “Shouts” should be sorted by date posted - latest first.
+        - Only the owner of the “shout” can alter it.
+    3. Only users that follow the other can see each others timeline.
+      - Include this on the seeder where in a user follows other user.
+    4. Timelines should update realtime. 
+        -Whenever User X is looking at User Y’s timeline, every update of Y’s timeline should directly reflect to User X’s view of User Y’s timeline.
+    5. Use your imagination for the look and feel of the app.
+    6. Candidate should demonstrate test suite implementations.
+
+    Note: Requirements 1,2 and 6 are TOP priorities.

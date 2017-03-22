@@ -11,7 +11,7 @@ import { main } from './reducers/main'
 import ReduxThunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 
-const logger = createLogger();
+const logger = createLogger()
 const middlewares = [ReduxThunk, logger]
 const reducers = {
   form: formReducer,
