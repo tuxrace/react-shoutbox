@@ -24,9 +24,9 @@ const store = createStore(reducer, applyMiddleware(...middlewares))
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route exact path="/" component={Login} />
-      <Route path="/shout" component={Shout} />
-      <Route path="/timeline/(:user)" component={Timeline} />
+      <Route exact path="/react-shoutbox" component={Login} />
+      <Route path="/react-shoutbox/shout" component={Shout} />
+      <Route path="/react-shoutbox/timeline/(:user)" component={Timeline} />
     </Router>
   </Provider>
   , document.getElementById('app'))

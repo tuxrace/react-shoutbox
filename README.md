@@ -1,10 +1,13 @@
 # Shoutbox
 
+## Working Demo
+[https://tuxrace.github.io/react-shoutbox/](https://tuxrace.github.io/react-shoutbox/)
+
 ## To Run
 
     1. yarn install or npm install
     2. yarn start or npm start
-    3. Go to localhost:8080
+    3. Go to localhost:8080/react-shoutbox
 
 ## To Test
 
