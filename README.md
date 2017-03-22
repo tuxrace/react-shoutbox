@@ -6,11 +6,6 @@
     2. yarn start or npm start
     3. Go to localhost:8080
 
-## To Run Backend Api
-
-    1. node ./api/index.js
-    2. Go to localhost:3000
-
 ## To Test
 
     yarn test
