@@ -1,5 +1,5 @@
 import { browserHistory } from 'react-router'
-
+const serverapi = 'https://shoutbox.mybluemix.net'
 export const login = data => (dispatch, getState) => {
   dispatch({ type: 'AUTHENTICATING', data: data.username })
 
@@ -15,14 +15,14 @@ export const login = data => (dispatch, getState) => {
 
   const authdata = { auth: false, user: null }
 
-  fetch(`http://${window.location.hostname}:3000/api/auth`, options)
+  fetch(`${serverapi}/api/auth`, options)
     .then(r => r.json())
     .then(r => {
       if (r === 'authorized') {
         window.localStorage.setItem('auto', JSON.stringify(Object.assign(authdata, { auth: true, user: data.username })))
         dispatch({ type: 'AUTH_SUCCESS', data: { auth: true, user: data.username } })
 
-        fetch(`http://${window.location.hostname}:3000/api/user/${data.username}`)
+        fetch(`${serverapi}/api/user/${data.username}`)
           .then(r => r.json())
           .then(([ r ]) => {
             dispatch({ type: 'SET_USER', data: { userInfo: r } })

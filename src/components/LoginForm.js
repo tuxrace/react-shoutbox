@@ -20,7 +20,7 @@ const LoginForm = ({ submitForm, handleSubmit, pristine, message }) => (
             <div className="form-group row">
               <label htmlFor="inputEmail3" className="col-sm-2 col-form-label text-white">Username</label>
               <div className="col-10 col-md-5">
-                <Field name="username" type="text" component={renderField} label="jon@istackholdings.com" validate={[ required, email ]}/>
+                <Field name="username" type="text" component={renderField} label="jon@mail.com" validate={[ required, email ]}/>
               </div>
             </div>
             <div className="form-group row">

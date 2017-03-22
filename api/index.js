@@ -2,7 +2,7 @@ var app = require('express')()
 var admin = require('firebase-admin')
 var serviceAccount = require('../shoutbox-21d0ef6b1bde.json')
 var bodyParser = require('body-parser')
-
+var serverapi = 'https://shoutbox.mybluemix.net'
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://shoutbox-12210.firebaseio.com',
@@ -31,18 +31,20 @@ app.get('/api', (req, res) => {
 app.post('/api/auth', (req, res) => {
   const username = req.body.username
   const password = req.body.password
-  const users = []
-  database.ref('users/').once('value')
-    .then(snapshot => {
-      snapshot.val().forEach(c => {
-        users.push(c)
-      })
-    })
-    .then(s => {
-      const userObj = users.filter(x => x.username === username)
-      console.log('test', userObj)
-      if (userObj.length > 0 && userObj[0].username === username && userObj[0].password === password) {
-        console.log('ok')
+  const options = {
+    credentials: 'same-origin',
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ username: username, password: password })
+  }
+
+  fetch(`${serverapi}/api/auth`, options)
+    .then(r => r.json())
+    .then(r => {
+      if (r === 'authorized') {
         res.json('authorized')
       } else {
         res.json('denied')

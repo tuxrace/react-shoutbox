@@ -1,5 +1,5 @@
 import firebase from 'firebase'
-
+const serverapi = 'https://shoutbox.mybluemix.net'
 var config = {
   apiKey: 'AIzaSyBOM9ePkyA10zmtbPxRe3MlojcaAG-pJ6c',
   authDomain: 'shoutbox-12210.firebaseapp.com',
@@ -13,10 +13,10 @@ const database = firebase.database()
 
 export const add = data => (dispatch, getState) => {
   const { user, message } = data
-  fetch(`http://${location.hostname}:3000/api/addshout?user=${user}&shout=${message}`)
+  fetch(`${serverapi}/api/addshout?user=${user}&shout=${message}`)
     .then(r => console.log(r))
   // dispatch({ type: 'SAVE', data: message })
-  fetch(`http://${window.location.hostname}:3000/api/posts`)
+  fetch(`${serverapi}/api/posts`)
     .then(r => r.json())
     .then(r => {
       var n = r.filter(x => x.user === user)
@@ -32,9 +32,9 @@ export const handleMessage = data => (dispatch, getState) => {
 export const del = data => (dispatch, getState) => {
   const { main } = getState()
   console.log(main.user)
-  fetch(`http://${window.location.hostname}:3000/api/delete?id=${data}`)
+  fetch(`${serverapi}/api/delete?id=${data}`)
   // dispatch({ type: 'DELETE', data })
-  fetch(`http://${window.location.hostname}:3000/api/posts`)
+  fetch(`${serverapi}/api/posts`)
     .then(r => r.json())
     .then(r => {
       var n = r.filter(x => x.user === main.user)
@@ -43,7 +43,7 @@ export const del = data => (dispatch, getState) => {
 }
 
 export const loadshouts = data => (dispatch, getState) => {
-  fetch(`http://${window.location.hostname}:3000/api/posts`)
+  fetch(`${serverapi}/api/posts`)
     .then(r => r.json())
     .then(r => {
       var n = r.filter(x => x.user === data)
@@ -52,7 +52,7 @@ export const loadshouts = data => (dispatch, getState) => {
 }
 
 export const loadusers = data => (dispatch, getState) => {
-  fetch(`http://${window.location.hostname}:3000/api/users`)
+  fetch(`${serverapi}/api/users`)
     .then(r => r.json())
     .then(r => {
       dispatch({ type: 'USERS', data: r })
@@ -60,7 +60,7 @@ export const loadusers = data => (dispatch, getState) => {
 }
 
 export const shoutinfo = data => (dispatch, getState) => {
-  fetch(`http://${window.location.hostname}:3000/api/posts/${data}`)
+  fetch(`${serverapi}/api/posts/${data}`)
     .then(r => r.json())
     .then(r => {
       dispatch({ type: 'INFO', data: r })
@@ -68,7 +68,7 @@ export const shoutinfo = data => (dispatch, getState) => {
 }
 
 export const update = data => (dispatch, getState) => {
-  fetch(`http://${window.location.hostname}:3000/api/update/${data.active}?data=${data.message}`)
+  fetch(`${serverapi}/api/update/${data.active}?data=${data.message}`)
   dispatch({ type: 'UPDATE', data })
 }
 
@@ -78,7 +78,7 @@ export const setactive = data => (dispatch, getState) => {
 
 export const setuser = data => (dispatch, getState) => {
   const { main } = getState()
-  fetch(`http://${window.location.hostname}:3000/api/user/${main.user}`)
+  fetch(`${serverapi}/api/user/${main.user}`)
     .then(r => r.json())
     .then(([r]) => dispatch({ type: 'SET_USER', data: { userInfo: r } }))
 }
@@ -97,7 +97,7 @@ export const loadselectedposts = data => (dispatch, getState) => {
     })
   })
   /*
-  fetch(`http://${window.location.hostname}:3000/api/posts`)
+  fetch(`${serverapi}/api/posts`)
     .then(r => r.json())
     .then(r => {
       const n = r.filter(x => x.user === data)
