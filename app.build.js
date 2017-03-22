@@ -28392,7 +28392,7 @@ _reactDom2.default.render(_react2.default.createElement(
   _react2.default.createElement(
     _reactRouter.Router,
     { history: _reactRouter.browserHistory },
-    _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/react-shoutbox', component: _Login2.default }),
+    _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/react-shoutbox/', component: _Login2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: '/react-shoutbox/shout', component: _Shout2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: '/react-shoutbox/timeline/(:user)', component: _Timeline2.default })
   )
