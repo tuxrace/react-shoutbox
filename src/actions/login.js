@@ -27,7 +27,7 @@ export const login = data => (dispatch, getState) => {
           .then(r => r.json())
           .then(([ r ]) => {
             dispatch({ type: SET_USER, data: { userInfo: r } })
-            browserHistory.push('/shout')
+            browserHistory.push('/react-shoutbox/shout')
           })
 
       } else {

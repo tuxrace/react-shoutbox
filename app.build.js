@@ -18485,7 +18485,7 @@ var login = exports.login = function login(data) {
               r = _ref2[0];
 
           dispatch({ type: _index.SET_USER, data: { userInfo: r } });
-          _reactRouter.browserHistory.push('/shout');
+          _reactRouter.browserHistory.push('/react-shoutbox/shout');
         });
       } else {
         dispatch({ type: _index.AUTH_FAILURE, data: { auth: false, auth_message: 'Invalid credentials' } });
