@@ -4,29 +4,20 @@ SELECTED_SHOUTS, SELECTED_USER } from '../types/index'
 
 const getStorage = data => {
   if (localStorage.auto) {
-    const { user, auth } = JSON.parse(localStorage.getItem('auto'))
-    switch (data) {
-      case 'user':
-        return user
-      case 'auth':
-        return auth
-      default:
-        return null
-    }
+    const storage = JSON.parse(localStorage.getItem('auto'))
+    return storage[data]
   }
 }
 const initialState = {
   auth: getStorage('auth'),
   user: getStorage('user'),
-  allusers: [
-    'q@mail.com', 'a@mail.com', 'z@mail.com'
-  ],
   posts: [],
   selected_posts: [],
   message: null,
   shoutinfo: null,
   active: null,
   remaining: 32,
+  selecteduser: getStorage('selecteduser'),
   userInfo: {follows: {names: []}}
 }
 

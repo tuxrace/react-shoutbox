@@ -1,7 +1,11 @@
 module.exports = {
-    "extends": ["standard", "plugin:react/recommended"],
-    "plugins": [
-        "standard",
-        "promise"
-    ]
+  env: {
+    browser: true,
+    node: true,
+  },
+  "extends": ["standard", "plugin:react/recommended"],
+  "plugins": [
+    "standard",
+    "promise"
+  ]
 };

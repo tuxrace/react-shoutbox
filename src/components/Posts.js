@@ -30,7 +30,8 @@ const Posts = ({ main, del, showEdit, toggleEdit, active, handleMessage, update 
 )
 
 Posts.propTypes = {
-  main: React.PropTypes.object
+  main: React.PropTypes.object,
+  del: React.PropTypes.func
 }
 
 export default connect(({ main }) => ({ main }), { del, handleMessage, update })(Posts)

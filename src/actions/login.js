@@ -27,13 +27,11 @@ export const login = data => (dispatch, getState) => {
           .then(r => r.json())
           .then(([ r ]) => {
             dispatch({ type: SET_USER, data: { userInfo: r } })
-            browserHistory.push('/react-shoutbox/shout')
+            browserHistory.push('/shout')
           })
-
       } else {
         dispatch({ type: AUTH_FAILURE, data: { auth: false, auth_message: 'Invalid credentials' } })
         localStorage.setItem('auto', JSON.stringify(Object.assign(authdata, { auth: false, auth_message: 'Invalid Credentials' })))
       }
     })
-
 }

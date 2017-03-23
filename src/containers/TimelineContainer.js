@@ -1,20 +1,19 @@
 import React, { Component } from 'react'
-import Message from '../components/Message'
 import { loadselectedposts, loadusers } from '../actions/index'
 import { connect } from 'react-redux'
 import TimelineList from '../components/TimelineList'
+import { browserHistory } from 'react-router'
 
 class TimelineContainer extends Component {
   constructor (props) {
     super(props)
     this.state = { showEdit: false, active: 0 }
-    const { loadselectedposts, loadusers } = this.props
+    localStorage.setItem({selecteduser: this.props.main.selecteduser})
+    const { loadselectedposts } = this.props
     loadselectedposts(this.props.main.selecteduser)
   }
-  componentDidMount () {
-
-  }  
-  render() {
+  componentDidMount () {}
+  render () {
     return <div>
       <div className="row">
         <div className="col-12 col-lg-6">
