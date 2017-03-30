@@ -66,8 +66,8 @@ export const update = data => (dispatch, getState) => {
   dispatch({ type: UPDATE, data })
 }
 
-export const setactive = data => (dispatch, getState) => {
-  dispatch({ type: SET_ACTIVE, data })
+export const setactive = data => {
+  return { type: SET_ACTIVE, data }
 }
 
 export const setuser = data => (dispatch, getState) => {
@@ -77,8 +77,8 @@ export const setuser = data => (dispatch, getState) => {
     .then(([r]) => dispatch({ type: SET_USER, data: { userInfo: r } }))
 }
 
-export const selecteduser = data => (dispatch, getState) => {
-  dispatch({ type: SELECTED_USER, data: { selecteduser: data } })
+export const selecteduser = data => {
+  return { type: SELECTED_USER, data: { selecteduser: data } }
 }
 
 export const loadselectedposts = data => (dispatch, getState) => {

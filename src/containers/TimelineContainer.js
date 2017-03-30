@@ -8,7 +8,7 @@ class TimelineContainer extends Component {
   constructor (props) {
     super(props)
     this.state = { showEdit: false, active: 0 }
-    localStorage.setItem({selecteduser: this.props.main.selecteduser})
+    localStorage.setItem('auto', {selecteduser: this.props.main.selecteduser})
     const { loadselectedposts } = this.props
     loadselectedposts(this.props.main.selecteduser)
   }

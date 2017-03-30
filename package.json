@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server -d --inline --hot",
     "test": "mocha --compilers js:babel-core/register ./src/**/*.test.js"
   },
   "keywords": [],
@@ -32,6 +32,7 @@
     "moment": "^2.17.1",
     "office-ui-fabric-react": "^2.3.0",
     "react-addons-test-utils": "^15.4.2",
+    "react-hot-loader": "next",
     "react-router-redux": "next",
     "redux-devtools": "^3.3.2",
     "redux-form": "^6.5.0",
