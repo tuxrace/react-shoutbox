@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { del, handleMessage, update } from '../actions/index'
 import EditForm from './EditForm'
 import moment from 'moment'
+const { string, boolean, object, func } = React.PropTypes
 
 const Posts = ({ main, del, showEdit, toggleEdit, active, handleMessage, update }) => (
   <div className="container">
@@ -30,8 +31,13 @@ const Posts = ({ main, del, showEdit, toggleEdit, active, handleMessage, update 
 )
 
 Posts.propTypes = {
-  main: React.PropTypes.object,
-  del: React.PropTypes.func
+  main: object,
+  del: func,
+  showEdit: boolean,
+  toggleEdit: func,
+  active: string,
+  handleMessage: func,
+  update: func
 }
 
 export default connect(({ main }) => ({ main }), { del, handleMessage, update })(Posts)
