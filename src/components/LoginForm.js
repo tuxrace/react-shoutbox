@@ -1,5 +1,6 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
+const { object } = React.PropTypes
 
 const required = value => value ? undefined : 'Required'
 const email = value => value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? 'Invalid email address' : undefined
@@ -44,6 +45,10 @@ LoginForm.propTypes = {
   submitForm: React.PropTypes.func,
   pristine: React.PropTypes.any,
   handleSubmit: React.PropTypes.func
+}
+
+renderField.propTypes = {
+  input: object
 }
 
 export default reduxForm({
