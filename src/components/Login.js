@@ -1,6 +1,6 @@
 import React from 'react'
 import LoginContainer from '../containers/LoginContainer'
-
+x
 const Login = () => (
   <div>
     <div className="jumbotron jumbotron-fluid jumboBg">
