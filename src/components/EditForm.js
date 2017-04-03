@@ -1,4 +1,5 @@
 import React from 'react'
+const {object, func, bool, string } = React.PropTypes
 
 const EditForm = ({ main, update, handleMessage, value, show, id, toggleEdit }) => (
   <div>
@@ -10,13 +11,13 @@ const EditForm = ({ main, update, handleMessage, value, show, id, toggleEdit }) 
 )
 
 EditForm.propTypes = {
-  main: React.PropTypes.object,
-  update: React.PropTypes.func,
-  handleMessage: React.PropTypes.func,
-  value: React.PropTypes.string,
-  show: React.PropTypes.bool,
-  id: React.PropTypes.string,
-  toggleEdit: React.PropTypes.func
+  main: object,
+  update: func,
+  handleMessage: func,
+  value: string,
+  show: bool,
+  id: string,
+  toggleEdit: func
 }
 
 export default EditForm
