@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import LoginForm from '../components/LoginForm'
 import { connect } from 'react-redux'
 import { login } from '../actions/login'
+const { func, object } = React.PropTypes
 
 class LoginContainer extends Component {
   submitForm (values) {
@@ -13,8 +14,8 @@ class LoginContainer extends Component {
 }
 
 LoginContainer.propTypes = {
-  login: React.PropTypes.func,
-  main: React.PropTypes.object
+  login: func,
+  main: object
 }
 
 export default connect(
